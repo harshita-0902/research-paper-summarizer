@@ -1,7 +1,8 @@
 import streamlit as st
 import fitz  # PyMuPDF
 from transformers import pipeline
-
+from utils import clean_text, chunk_text
+from model import load_model
 # -------------------------------
 # Load Model (runs once)
 # -------------------------------
@@ -76,3 +77,13 @@ if uploaded_file:
     st.subheader("⭐ Key Insights")
     for i in insights[:5]:
         st.write("- " + i)
+
+import streamlit as st
+from utils import clean_text, chunk_text
+from model import load_model
+
+st.title("📄 AI Research Paper Summarizer")
+
+model_choice = st.selectbox("Choose Model", ["BART", "T5"])
+
+model = load_model(model_choice)
